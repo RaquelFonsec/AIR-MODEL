@@ -1,2 +1,2 @@
+
 class FlatsController < ApplicationController
-end
