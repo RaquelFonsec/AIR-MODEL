@@ -1,4 +1,4 @@
-class Booking < ApplicationRecord
+class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :flat
 end

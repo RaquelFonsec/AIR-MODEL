@@ -1,9 +1,6 @@
 class FlatsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
-  def index
-    @flats = Flat.all
-  end
 
   def new
     @flat = Flat.new
@@ -15,12 +12,13 @@ class FlatsController < ApplicationController
     if @flat.save
       redirect_to @flat, notice: "Flat criado com sucesso."
     else
-      render 'new'
-      end
+     render 'new'
+    end
   end
 
   def show
     @flat = Flat.find(params[:id])
+    @comment = Comment.new
   end
 
   def edit
@@ -45,6 +43,7 @@ class FlatsController < ApplicationController
     private
 
   def flats_params
-    params.require(:flat).permit(:city, :address, :price)
-  end
-end
+params.require(:flat).permit(:city, :address, :price, fotos: [])
+
+   end
+ end
