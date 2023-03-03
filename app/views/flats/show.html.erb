@@ -8,7 +8,7 @@
 <% end %>
 
 <p><%= link_to "Editar", edit_flat_path(@flat) %></p>
-<p><%= link_to "Booking this flat", new_flat_booking(@flat) %></p>
+<p><%= link_to "Booking this flat", new_flat_booking_path(@flat) %></p>
 
 <p><%= button_to "Excluir", flat_path(@flat), method: :delete, data: { confirm: "Tem certeza que deseja excluir este Flat?" } %></p>
 

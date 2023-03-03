@@ -13,6 +13,7 @@ class BookingsController < ApplicationController
   # GET /bookings/new
   def new
     @booking = Booking.new
+    @flat = Flat.find(params[:flat_id])
   end
 
   # GET /bookings/1/edit
