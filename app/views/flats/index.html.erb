@@ -1,4 +1,11 @@
 
+<% @flats.each do |flat| %>
+  <div class="flat">
+    <h2><%= link_to flat.title, flat %></h2>
+    <p><strong>Preço:</strong> <%= number_to_currency(flat.price) %></p>
+    <p><%= link_to "Ver mais", flat %></p>
+  </div>
+<% end %>
 <h1 class="text-center mb-4">Flats Available for Rent</h1>
 <div class="d-flex justify-content-around">
   <div class="row">

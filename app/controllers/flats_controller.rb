@@ -1,5 +1,4 @@
 class FlatsController < ApplicationController
-
   before_action :authenticate_user!, except: [:index, :show]
 
 
@@ -23,11 +22,11 @@ class FlatsController < ApplicationController
   end
 
   def edit
-   @flat =  Flat.find(params[:id])
+    @flat =  Flat.find(params[:id])
   end
 
   def update
-  @flat =  Flat.find(params[:id])
+    @flat =  Flat.find(params[:id])
   if @flat.update(flats_params)
     redirect_to @flat, notice: "Flat atualizado com sucesso."
   else
@@ -36,9 +35,9 @@ class FlatsController < ApplicationController
   end
 
   def destroy
-  @flat = Flat.find(params[:id])
-  @flat.destroy
-  redirect_to flats_path, notice: "Flat excluído com sucesso."
+    @flat = Flat.find(params[:id])
+    @flat.destroy
+    redirect_to flats_path, notice: "Flat excluído com sucesso."
   end
 
     private
