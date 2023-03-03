@@ -5,12 +5,16 @@
   </div>
 </section>
 
-
 <h1 class="text-center mb-4">Flats Available for Rent</h1>
 <div class="container">
   <div class="cards">
+    <% @flats.each do |flat| %>
     <div class="card">
-      <img class="card-img-top" src="https://picsum.photos/id/1015/300/200" alt="Card image cap">
+      <% if flat.fotos.attached? %>
+        <img class="card-img-top" src="<%= cl_image_path flat.fotos.first.key %>" alt="Card image cap">
+      <% else %>
+        <img class="card-img-top" src="https://picsum.photos/id/1015/300/200" alt="Card image cap">
+      <% end %>
       <div class="card-body">
         <h5 class="card-title">Flat 1</h5>
         <div class="card-info">
@@ -20,54 +24,9 @@
           <div class="card-rating">
             <i class="fa fa-star">4,89</i>
           </div>
-          <a href="#" class="btn btn-primary">View Details</a>
+          <%= link_to "View Details", flats_path(flat) %>
         </div>
       </div>
-    </div>
-    <div class="card">
-      <img class="card-img-top" src="https://picsum.photos/id/1015/300/200" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Flat 1</h5>
-        <div class="card-info">
-          <p class="card-city-country">City, Country</p>
-          <p class="card-description">One line of description</p>
-          <p class="card-price">$100/night</p>
-          <div class="card-rating">
-            <i class="fa fa-star">4,89</i>
-          </div>
-          <a href="#" class="btn btn-primary">View Details</a>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <img class="card-img-top" src="https://picsum.photos/id/1015/300/200" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Flat 1</h5>
-        <div class="card-info">
-          <p class="card-city-country">City, Country</p>
-          <p class="card-description">One line of description</p>
-          <p class="card-price">$100/night</p>
-          <div class="card-rating">
-            <i class="fa fa-star">4,89</i>
-          </div>
-          <a href="#" class="btn btn-primary">View Details</a>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <img class="card-img-top" src="https://picsum.photos/id/1015/300/200" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Flat 1</h5>
-        <div class="card-info">
-          <p class="card-city-country">City, Country</p>
-          <p class="card-description">One line of description</p>
-          <p class="card-price">$100/night</p>
-          <div class="card-rating">
-            <i class="fa fa-star">4,89</i>
-          </div>
-          <a href="#" class="btn btn-primary">View Details</a>
-        </div>
-      </div>
-    </div>
+    <% end %>
   </div>
 </div>
