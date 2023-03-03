@@ -27,11 +27,11 @@ class FlatsController < ApplicationController
 
   def update
     @flat =  Flat.find(params[:id])
-  if @flat.update(flats_params)
-    redirect_to @flat, notice: "Flat atualizado com sucesso."
-  else
-    render :edit
-  end
+    if @flat.update(flats_params)
+      redirect_to @flat, notice: "Flat atualizado com sucesso."
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -43,7 +43,6 @@ class FlatsController < ApplicationController
     private
 
   def flats_params
-params.require(:flat).permit(:city, :address, :price, fotos: [])
-
-   end
- end
+    params.require(:flat).permit(:city, :address, :price, fotos: [])
+  end
+end
