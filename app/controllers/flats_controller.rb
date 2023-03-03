@@ -2,9 +2,6 @@ class FlatsController < ApplicationController
 
   before_action :authenticate_user!, except: [:index, :show]
 
-  def index
-    @flats = Flat.all
-  end
 
   def new
     @flat = Flat.new
@@ -17,11 +14,12 @@ class FlatsController < ApplicationController
       redirect_to @flat, notice: "Flat criado com sucesso."
     else
      render 'new'
-      end
+    end
   end
 
   def show
     @flat = Flat.find(params[:id])
+    @comment = Comment.new
   end
 
   def edit

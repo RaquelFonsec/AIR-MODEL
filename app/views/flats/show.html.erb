@@ -12,3 +12,14 @@
 
 <%= link_to "Voltar para a lista de Flats", flats_path %>
 
+<h2>Comentários:</h2>
+<%  @flat.comments.each do |comment| %>
+<p> <%= comment.content %></p>
+<%end %>
+
+<h2>Adicionar comentário:</h2>
+<%= form_for([@flat, @comment]) do |f| %>
+    <%= f.label :content %>
+    <%= f.text_area :content %>
+    <%= f.submit "Criar Comentário"%>
+ <%end %>

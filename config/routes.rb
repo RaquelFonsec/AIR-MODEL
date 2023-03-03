@@ -1,11 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
-  resources :bookings
   root to: "pages#home"
-  resources :flats
-
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
+  resources :flats, except: :index do
+    resources :bookings
+    resources :comments
+  end
 end
