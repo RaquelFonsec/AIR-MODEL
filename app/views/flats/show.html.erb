@@ -3,9 +3,12 @@
 <p><strong>Preço:</strong> <%= number_to_currency(@flat.price) %></p>
 
 <p><strong>Endereço:</strong> <%= @flat.address %></p>
-
+<% @flat.fotos.each do |foto| %>
+<%= cl_image_tag foto.key,width:300 %>
+<% end %>
 <p><%= link_to "Editar", edit_flat_path(@flat) %></p>
 
 <p><%= button_to "Excluir", flat_path(@flat), method: :delete, data: { confirm: "Tem certeza que deseja excluir este Flat?" } %></p>
 
 <%= link_to "Voltar para a lista de Flats", flats_path %>
+
