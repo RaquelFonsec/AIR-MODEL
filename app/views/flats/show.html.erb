@@ -1,27 +1,53 @@
-<h1><%= @flat.title %></h1>
+<div class="container">
+  <h1><%= @flat.title %></h1>
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-6">
+      <div class="card-rating">
+        <i class="fa fa-star">4,89</i>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <p><%= @flat.comments.size %> Comentários</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <img class="card-img-top" src="https://picsum.photos/id/1015/300/200" alt="Card image cap">
+      <% @flat.fotos.each do |foto| %>
+        <%= cl_image_tag foto.key,width:300 %>
+      <% end %>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"><strong>Preço:</strong> <%= number_to_currency(@flat.price) %></h5>
+          <h5 class="card-city-country"><strong>Cidade:</strong> <%= @flat.city %></h5>
+          <h5><strong>Endereço:</strong> <%= @flat.address %></h5>
+          <%# <p class="card-description"><strong>Descrição:</strong> <%= @flat.description %>
+          <p><%= link_to "Editar", edit_flat_path(@flat) %></p>
+          <p><%= link_to "Booking this flat", new_flat_booking_path(@flat) %></p>
+          <p><%= button_to "Excluir", flat_path(@flat), method: :delete, data: { confirm: "Tem certeza que deseja excluir este Flat?" } %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= link_to "Voltar para a lista de Flats", root_path%>
 
-<p><strong>Preço:</strong> <%= number_to_currency(@flat.price) %></p>
-
-<p><strong>Endereço:</strong> <%= @flat.address %></p>
-<% @flat.fotos.each do |foto| %>
-<%= cl_image_tag foto.key,width:300 %>
-<% end %>
-
-<p><%= link_to "Editar", edit_flat_path(@flat) %></p>
-<p><%= link_to "Booking this flat", new_flat_booking_path(@flat) %></p>
-
-<p><%= button_to "Excluir", flat_path(@flat), method: :delete, data: { confirm: "Tem certeza que deseja excluir este Flat?" } %></p>
-
-<%= link_to "Voltar para a lista de Flats", root_path%>
-
-<h2>Comentários:</h2>
-<%  @flat.comments.each do |comment| %>
-<p> <%= comment.content %></p>
-<%end %>
-
-<h2>Adicionar comentário:</h2>
-<%= form_for([@flat, @comment]) do |f| %>
-    <%= f.label :content %>
-    <%= f.text_area :content %>
-    <%= f.submit "Criar Comentário"%>
- <%end %>
+  <div class="row d-flex justify-content-between">
+    <div class="col-sm-4">
+      <h2>Comentários:</h2>
+      <% @flat.comments.each do |comment| %>
+        <p><%= comment.content %></p>
+      <% end %>
+    </div>
+    <div class="col-sm-4">
+      <h2>Adicionar comentário:</h2>
+      <%= simple_form_for([@flat, @comment]) do |f| %>
+        <div class="form-inputs">
+          <%= f.input :content, placeholder: "Deixe seu comentario aqui", label: false %>
+          <%= f.submit "Criar Comentário"%>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
