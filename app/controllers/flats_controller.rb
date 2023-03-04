@@ -1,6 +1,5 @@
 class FlatsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
-
+  before_action :authenticate_user!, except: %i[index show]
 
   def new
     @flat = Flat.new
@@ -12,7 +11,7 @@ class FlatsController < ApplicationController
     if @flat.save
       redirect_to @flat, notice: "Flat criado com sucesso."
     else
-     render 'new'
+      render 'new'
     end
   end
 
@@ -27,11 +26,11 @@ class FlatsController < ApplicationController
 
   def update
     @flat =  Flat.find(params[:id])
-  if @flat.update(flats_params)
-    redirect_to @flat, notice: "Flat atualizado com sucesso."
-  else
-    render :edit
-  end
+    if @flat.update(flats_params)
+      redirect_to @flat, notice: "Flat atualizado com sucesso."
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -40,10 +39,9 @@ class FlatsController < ApplicationController
     redirect_to flats_path, notice: "Flat excluído com sucesso."
   end
 
-    private
+  private
 
   def flats_params
-params.require(:flat).permit(:city, :address, :price, fotos: [])
-
-   end
- end
+    params.require(:flat).permit(:city, :address, :price, fotos: [])
+  end
+end
