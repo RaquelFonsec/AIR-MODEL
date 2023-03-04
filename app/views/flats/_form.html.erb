@@ -1,41 +1,18 @@
-<%= form_for @flat do |f| %>
-  <% if @flat.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@flat.errors.count, "erro") %> impedir a criação do Flat:</h2>
-      <ul>
-        <% @flat.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<div class="container">
+  <%= simple_form_for(@flat) do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+    <div class="form-inputs">
+      <%= f.input :title %>
+      <%= f.input :city %>
+      <%= f.input :address %>
+      <%= f.input :price %>
+      <%= f.file_field :foto, multiple: true %>
+    </div>
+
+    <div class="actions btn btn-light border border-black rounded border-top-5">
+      <%= f.button :submit %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :city %>
-    <%= f.text_area :city %>
-  </div>
-
-  <div class="field">
-    <%= f.label :price %>
-    <%= f.number_field :price, step: :any %>
-  </div>
-
-  <div class="field">
-    <%= f.label :address %>
-    <%= f.text_field :address %>
-  </div>
-
-  <div class= "field">
-    <%= f.label :fotos %>
-    <%= f.file_field :fotos, multiple: true %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Criar Flat" %>
-  </div>
-<% end %>
+</div>
