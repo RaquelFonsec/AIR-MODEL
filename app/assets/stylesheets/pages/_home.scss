@@ -32,17 +32,29 @@ padding-top: 66px;
 
 .cards {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 16px;
 }
 
-@media(max-width: 992px) {
+@media(max-width: 1640px) {
+  .cards {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+@media(max-width: 1128px) {
+  .cards {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media(max-width: 949px) {
   .cards {
     grid-template-columns: 1fr 1fr;
   }
 }
 
-@media(max-width: 768px) {
+@media(max-width: 548px) {
   .cards {
     grid-template-columns: 1fr;
   }
