@@ -1,5 +1,27 @@
-<h1>My Bookings</h1>
-
-<% @bookings.each do |booking|%>
-<p><%= booking %></p>
-<% end %>
+<h1 class="text-center mb-4">Congratulations this is your reservation!!!</h1>
+<div class="container">
+  <div class="cards">
+    <% @bookings.each do |booking|%>
+      <div class="card">
+        <% if booking.flat_id.fotos.attached? %>
+          <img class="card-img-top" src="<%= cl_image_path flat.fotos.first.key %>" alt="Card image cap">
+        <% else %>
+          <img class="card-img-top" src="https://picsum.photos/id/1015/300/200" alt="Card image cap">
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title"><%=booking.flat_id.title%></h5>
+          <div class="card-info">
+            <p class="card-city-country"><%=booking.flat_id.city%></p>
+            <p class="card-description">One line of description</p>
+            <i class="fa-regular fa-calendar-days"><% booking.start_date %> --> <%booking.end_date%> </i>
+            <p class="card-price">$<%=booking.flat_id.price%>0</p>
+            <div class="card-rating">
+              <i class="fa fa-star">4,89</i>
+            </div>
+            <%= link_to "View Details", flat_path(flat) %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
