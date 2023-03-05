@@ -28,7 +28,11 @@
               <i class="fa fa-star">4,89</i>
             </div>
           </div>
+          <div class="form-inputs">
+        <%= f.input :name %>
+        </div>
           <%= link_to "view", flats_path(flat) %>
+          <%= link_to "New flat", new_flat_path if policy(flat).new? %>
         </div>
       </div>
     <% end %>

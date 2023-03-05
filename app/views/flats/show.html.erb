@@ -1,5 +1,26 @@
-<div class="container">
+
+  <% if @flat.present? %>
   <h1><%= @flat.title %></h1>
+  <div class="container">
+    <%= simple_form_for(@flat) do |f| %>
+      <%= f.error_notification %>
+      <%= f.error_notification mensagem: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+      <div class="form-inputs">
+        <%= f.input :title %>
+        <%= f.input :city %>
+        <%= f.input :address %>
+        <%= f.input :price %>
+        <%= f.file_field :foto, multiple: true %>
+      </div>
+      <div class="actions btn btn-light border border-black rounded border-top-5"> <%= f.button :submit %>
+    <% end %>
+    </div>
+
+    <% else %>
+  <p>Flat não encontrado</p>
+<% end %>
+</div>
+
   <div class="row d-flex justify-content-center">
     <div class="col-md-6">
       <div class="card-rating">
