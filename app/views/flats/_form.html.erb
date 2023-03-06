@@ -7,8 +7,9 @@
       <%= f.input :title %>
       <%= f.input :city %>
       <%= f.input :address %>
+      <%= f.input :category, collection: Flat::CATEGORIES.map { |category| category.capitalize } %>
       <%= f.input :price %>
-      <%= f.file_field :foto, multiple: true %>
+      <%= f.file_field :fotos, multiple: true %>
     </div>
 
     <div class="actions btn btn-light border border-black rounded border-top-5">

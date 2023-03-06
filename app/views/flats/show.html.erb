@@ -24,6 +24,7 @@
           <h5 class="card-title"><strong>Preço:</strong> <%= number_to_currency(@flat.price) %></h5>
           <h5 class="card-city-country"><strong>Cidade:</strong><%= @flat.city %></h5>
           <h5><strong>Endereço:</strong> <%= @flat.address %></h5>
+          <p class="card-text">Category: <%= @flat.category %></h5>        <%# <p class="card-description"><strong>Descrição:</strong> <%= @flat.description %>
           <%# <p class="card-description"><strong>Descrição:</strong> <%= @flat.description %>
           <p><%= link_to "Editar", edit_flat_path(@flat) %></p>
           <p><%= link_to "Booking this flat", new_flat_booking_path(@flat) %></p>

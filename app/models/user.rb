@@ -21,8 +21,8 @@ class User < ApplicationRecord
           end
 
           return user
-        end
-        
+  end
+
   has_many :flats
   has_many :bookings
 
