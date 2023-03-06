@@ -1,7 +1,36 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+
+
+  User.create(
+    { first_name: 'João', email: 'joao@hotmail.com', password: '123456' }
+    #{ name: 'Maria', email: 'maria@hotmail.com', password: '123456' },
+   # { name: 'Pedro', email: 'pedro@hotmail.com', password: '123456' }
+  )
+
+
+
+  Flat.create(
+    { title: 'Apartamento aconchegante', price: 100, user_id: 1 }
+    #{ title: 'Casa espaçosa', summary: 'Casa ampla de 3 quartos', price_per_night: 200, user_id: 2 },
+   # { title: 'Chalé nas montanhas', summary: 'Chalé rústico em meio à natureza', price_per_night: 150, user_id: 3 },
+  )
+
+
+  Booking.create(
+    { start_date: Date.new(2023,03,10), end_date:  Date.new(2023,03,15),total_price:100, user_id: 1, flat_id: 1 }
+   # { checkin_date: '2023-03-20', checkout_date: '2023-03-25', guest_number: 4, user_id: 2, flat_id: 1 },
+   # { checkin_date: '2023-03-15', checkout_date: '2023-03-20', guest_number: 2, user_id: 3, flat_id: 3 },
+  )
+
+
+  Comment.create(
+    { user_id: 1, content: 'Excelente apartamento, recomendo!', flat_id: 1 }
+    #{ user_name: 'Maria', comment_text: 'Fiquei muito satisfeita com a hospedagem, voltarei com certeza.', flat_id: 1 },
+    #{ user_name: 'Pedro', comment_text: 'Ótima localização, próximo de tudo que eu precisava.', flat_id: 3 },
+  )
+
+
+  #Description.create(
+   # { title: 'Apartamento aconchegante', summary: 'Ótimo apartamento de 2 quartos', property_type: 'Apartamento', room_number: 2, guest_number: 4, city: 'Rio de Janeiro', state: 'RJ', country: 'Brasil', flat_id: 1 },
+   # { title: 'Casa espaçosa', summary: 'Casa ampla de 3 quartos', property_type: 'Casa', room_number: 3, guest_number: 6, city: 'São Paulo', state: 'SP', country: 'Brasil', flat_id: 2 },
+   # { title: 'Chalé nas montanhas', summary: 'Chalé rústico em meio à natureza', property_type: 'Chalé', room_number: 1, guest_number: 2, city: 'Gramado', state: 'RS', country: 'Brasil', flat_id: 3 }
+  #)
