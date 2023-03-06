@@ -2,11 +2,13 @@ class CommentsController < ApplicationController
 
   def create
     @flat = Flat.find(params[:flat_id])
-    @comment = @flat.comments.new(comment_params)
+    @comment = Comment.new(comment_params)
     @comment.flat = @flat
     @comment.user = current_user
-    @comment.save
-    redirect_to flat_path(@flat)
+    authorize @comment
+    if @comment.save
+      redirect_to flat_path(@flat)
+    end
   end
 
   private
