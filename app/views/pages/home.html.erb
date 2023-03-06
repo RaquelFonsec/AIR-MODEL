@@ -5,9 +5,10 @@
   </div>
 </section>
 <div>
-<ul class="d-inline">
+<ul class=" d-flex d-inline justify-content-around">
+<li><%= link_to "All", root_path %></li>
 <% Flat::CATEGORIES.each do |category| %>
-<li><%= link_to category.capitalize, root_path(filter: category) %></li>
+<li><i class="fa-solid fa-umbrella-beach"></i><%= link_to category.capitalize, root_path(filter: category) %></li>
 <% end %>
 </ul>
 </div>

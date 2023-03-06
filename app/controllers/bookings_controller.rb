@@ -2,7 +2,7 @@ class BookingsController < ApplicationController
 
   after_action :verify_authorized, except: :index
   after_action :verify_policy_scoped, only: :index
-  before_action :authenticate_user!,only: [:new, :create, :index]
+  before_action :authenticate_user!, only: [:new, :create, :index]
 
   def index
     @bookings = policy_scope(Booking)
@@ -24,7 +24,7 @@ class BookingsController < ApplicationController
     if @booking.save
       redirect_to my_bookings_path
     else
-      render "new" ,message: @booking.errors, status: :unprocessable_entity
+      render "new", message: @booking.errors, status: :unprocessable_entity
     end
   end
 
