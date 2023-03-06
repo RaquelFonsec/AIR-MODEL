@@ -1,29 +1,12 @@
-
-  <div class="container">
-  <% if @flat.persisted? %>
-    <%= simple_form_for(@flat) do |f| %>
-      <%= f.error_notification %>
-      <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-      <div class="form-inputs">
-        <%= f.input :title %>
-        <%= f.input :city %>
-        <%= f.input :address %>
-        <%= f.input :price %>
-        <%= f.file_field :fotos, multiple: true %>
-      </div>
-      <div class="actions btn btn-light border border-black rounded border-top-5">
-        <%= f.button :submit %>
-      </div>
-    <% end %>
-
-
-  <div class="row d-flex justify-content-center">
-    <div class="col-md-6">
+<div class="container">
+  <h1><%= @flat.title %></h1>
+  <div class="row d-flex justify-content-start">
+    <div class="col-md-1">
       <div class="card-rating">
         <i class="fa fa-star">4,89</i>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-2">
       <p><%= @flat.comments.size %> Comentários</p>
     </div>
   </div>
@@ -37,8 +20,9 @@
     <div class="col-md-6">
       <div class="card">
         <div class="card-body">
+          <h5 class="card-title"><%= @flat.title %></h5>
           <h5 class="card-title"><strong>Preço:</strong> <%= number_to_currency(@flat.price) %></h5>
-          <h5 class="card-city-country"><strong>Cidade:</strong> <%= @flat.city %></h5>
+          <h5 class="card-city-country"><strong>Cidade:</strong><%= @flat.city %></h5>
           <h5><strong>Endereço:</strong> <%= @flat.address %></h5>
           <%# <p class="card-description"><strong>Descrição:</strong> <%= @flat.description %>
           <p><%= link_to "Editar", edit_flat_path(@flat) %></p>

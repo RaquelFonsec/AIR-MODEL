@@ -16,11 +16,11 @@
         <img class="card-img-top" src="https://picsum.photos/id/1015/300/200" alt="Card image cap">
       <% end %>
       <div class="card-body">
-        <h5 class="card-title">Flat 1</h5>
+        <h5 class="card-title"><%= (flat.title) %></h5>
         <div class="card-info">
-          <p class="card-city-country">City, Country</p>
-          <p class="card-description">One line of description</p>
-          <p class="card-price">$100/night</p>
+          <p class="card-city-country"><%= flat.city %></p>
+          <p class="card-text">Endereço: <%= flat.address %></h5>          <%# <p class="card-description"><strong>Descrição:</strong> <%= @flat.description %>
+          <p class="card-price"><%= number_to_currency(flat.price) %></p>
           <div class="card-rating">
             <i class="fa fa-star">4,89</i>
           </div>

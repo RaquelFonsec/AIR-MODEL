@@ -72,6 +72,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_05_160903) do
     t.datetime "updated_at", null: false
     t.string "title"
     t.bigint "user_id", null: false
+    t.text "description"
     t.index ["user_id"], name: "index_flats_on_user_id"
   end
 
