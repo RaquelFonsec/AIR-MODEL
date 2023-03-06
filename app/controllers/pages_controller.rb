@@ -3,14 +3,6 @@ class PagesController < ApplicationController
 
   def home
     @flats = Flat.all
-    @markers = @flats.geocoded.map do |flat|
-      {
-        lat: flat.latitude,
-        lng: flat.longitude,
-        info_window: render_to_string(partial: "popup", locals: { flat: flat }),
-        image_url: helpers.asset_url("logo.png")
-      }
-    end
   end
 
   def my_bookings

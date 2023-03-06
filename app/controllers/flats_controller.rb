@@ -18,6 +18,13 @@ class FlatsController < ApplicationController
   def show
     @flat = Flat.find(params[:id])
     @comment = Comment.new
+    @marker =
+      [{
+        lat: @flat.latitude,
+        lng: @flat.longitude,
+        info_window: render_to_string(partial: "popup", locals: { flat: @flat }),
+        marker_html: render_to_string(partial: "marker")
+      }]
   end
 
   def edit
