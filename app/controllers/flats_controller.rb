@@ -8,41 +8,38 @@ def index
   end
 
 
-def show
-  @flat = Flat.find(params[:id])
+  def show
+    @flat = Flat.find(params[:id])
     @comment = Comment.new
     authorize @flat
   end
-end
 
 
-def new
-
-@flat = Flat.new
-authorize @flat
-end
-
-
-def edit
-
-authorize @flat
- end
+  def new
+    @flat = Flat.new
+    authorize @flat
+  end
 
 
-def create
-  @flat = Flat.new(flat_params)
-  @flat.user = current_user
+  def edit
   authorize @flat
-  respond_to do |format|
-    if @flat.save
-       format.html { redirect_to flat_url(@flat), notice: "Flat criado  om sucesso." }
-      format.json { render :show, status: :created, location: @flat }
-     else
-       format.html { render :new, status: :unprocessable_entity }
-      format.json { render json: @flat.errors, status: :unprocessable_entity }
+  end
+
+
+  def create
+    @flat = Flat.new(flat_params)
+    @flat.user = current_user
+    authorize @flat
+    respond_to do |format|
+      if @flat.save
+        format.html { redirect_to flat_url(@flat), notice: "Flat criado  om sucesso." }
+        format.json { render :show, status: :created, location: @flat }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @flat.errors, status: :unprocessable_entity }
+      end
     end
   end
-end
 
 
   def update
@@ -62,10 +59,9 @@ end
   def destroy
    @flat.destroy
    authorize @flat
-  respond_to do |format|
-  format.html { redirect_to flats_url, notice: "Flat excluido com sucesso." }
-  format.json { head :no_content }
-  end
+
+  redirect_to root_path, status: :see_other, notice: "Flat excluido com sucesso."
+
   end
 
   private
@@ -74,6 +70,7 @@ end
    @flat = Flat.find(params[:id])
   end
 
-  def flats_params
-    params.require(:flat).permit(:city, :user_id, :description, :address, :price, fotos: [])
+  def flat_params
+    params.require(:flat).permit(:city, :title, :user_id, :description, :address, :price, fotos: [])
   end
+end

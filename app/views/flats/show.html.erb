@@ -1,6 +1,6 @@
 
   <div class="container">
-  <% if @flat.present? %>
+  <% if @flat.persisted? %>
     <%= simple_form_for(@flat) do |f| %>
       <%= f.error_notification %>
       <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
@@ -15,6 +15,7 @@
         <%= f.button :submit %>
       </div>
     <% end %>
+
 
   <div class="row d-flex justify-content-center">
     <div class="col-md-6">
@@ -66,4 +67,5 @@
       <% end %>
     </div>
   </div>
+  <% end %>
 </div>
