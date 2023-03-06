@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   root to: "pages#home"
   get "my_bookings", to: "pages#my_bookings"
   get "my_flats", to: "pages#my_flats"
+
+  resources :bookings, only: [:index, :show, :new, :create]
   resources :flats, except: :index do
     resources :bookings
     resources :comments

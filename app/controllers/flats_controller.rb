@@ -1,61 +1,79 @@
 class FlatsController < ApplicationController
-  before_action :authenticate_user!, except: %i[index show]
+  before_action :set_flat, only: %i[ show edit update destroy ]
 
-  def index
+def index
+
     @flats = policy_scope(Flat)
+    authorize @flats
   end
 
-  def new
-    @flat = Flat.new
-    authorize @flat
-  end
 
-  def create
-    @flat = Flat.new(flats_params)
-    @flat.user = current_user
-    authorize @flat
-
-    if @flat.save
-      redirect_to @flat, notice: "Flat criado com sucesso."
-    else
-      render 'new'
-    end
-  end
-
-  def show
-    @flat = Flat.find(params[:id])
-    authorize @flat
+def show
+  @flat = Flat.find(params[:id])
     @comment = Comment.new
+    authorize @flat
   end
-
-
-  def edit
-    @flat =  Flat.find(params[:id])
-  authorize @flat
 end
 
 
+def new
+
+@flat = Flat.new
+authorize @flat
+end
+
+
+def edit
+
+authorize @flat
+ end
+
+
+def create
+  @flat = Flat.new(flat_params)
+  @flat.user = current_user
+  authorize @flat
+  respond_to do |format|
+    if @flat.save
+       format.html { redirect_to flat_url(@flat), notice: "Flat criado  om sucesso." }
+      format.json { render :show, status: :created, location: @flat }
+     else
+       format.html { render :new, status: :unprocessable_entity }
+      format.json { render json: @flat.errors, status: :unprocessable_entity }
+    end
+  end
+end
+
 
   def update
-    @flat =  Flat.find(params[:id])
     authorize @flat
-    if @flat.update(flats_params)
-      redirect_to @flat, notice: "Flat atualizado com sucesso."
-    else
-      render :edit
+    respond_to do |format|
+      if @flat.update(flat_params)
+        format.html { redirect_to flat_url(@flat), notice: "Flat atualizado com sucesso." }
+        format.json { render :show, status: :ok, location: @flat }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @flat.errors, status: :unprocessable_entity }
+      end
     end
   end
 
+
   def destroy
-    @flat = Flat.find(params[:id])
-    authorize @flat
-    @flat.destroy
-    redirect_to flats_path, notice: "Flat excluído com sucesso."
+   @flat.destroy
+   authorize @flat
+  respond_to do |format|
+  format.html { redirect_to flats_url, notice: "Flat excluido com sucesso." }
+  format.json { head :no_content }
+  end
   end
 
   private
 
+  def set_flat
+   @flat = Flat.find(params[:id])
+  end
+
   def flats_params
     params.require(:flat).permit(:city, :user_id, :description, :address, :price, fotos: [])
   end
-end

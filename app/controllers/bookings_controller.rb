@@ -1,33 +1,31 @@
 class BookingsController < ApplicationController
-  before_action :set_flat
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+  before_action :Verify_policy_scoped, only: :index
 
-  # GET /bookings or /bookings.json
   def index
-    @bookings = Booking.all
+    @bookings = policy_scope(Booking)
   end
 
-  # GET /bookings/1 or /bookings/1.json
-  def show
+
+def show
+ authorize @booking
   end
 
-  # GET /bookings/new
-  def new
+
+  ef new
     @booking = Booking.new
-    @flat = Flat.find(params[:flat_id])
+    authorize @booking
   end
 
-  # GET /bookings/1/edit
+
   def edit
+    authorize @booking
   end
 
-  # POST /bookings or /bookings.json
-  def create
 
-    authorize Booking # adiciona a autorização
-    @booking = @flat.bookings.build(booking_params)
-    @booking.user = current_user
+  def create
+    @booking = Booking.new(booking_params)
+    authorize @booking
 
     respond_to do |format|
       if @booking.save
@@ -41,59 +39,43 @@ class BookingsController < ApplicationController
   end
 
 
-  # PATCH/PUT /bookings/1 or /bookings/1.json
   def update
+    authorize @booking
 
+    respond_to do |format|
+      if @booking.update(booking_params)
+        format.html { redirect_to @booking, notice: 'Booking was successfully updated.' }
+        format.json { render :show, status: :ok, location: @booking }
+      else
+        format.html { render :edit }
+        format.json { render json: @booking.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
-  # DELETE /bookings/1 or /bookings/1.json
+
   def destroy
+    authorize @booking
     @booking.destroy
-    redirect_to flat_path(@flat), notice: "Booking was successfully destroyed."
+    respond_to do |format|
+      format.html { redirect_to bookings_url, notice: 'Booking was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
-  class BookingsController < ApplicationController
-    before_action :set_flat
-    before_action :set_booking, only: [:show, :edit, :update, :destroy]
-    before_action :authenticate_user!
-
-    def create
-      authorize Booking # adiciona a autorização
-      @booking = @flat.bookings.build(booking_params)
-      @booking.user = current_user
-
-      respond_to do |format|
-        if @booking.save
-          format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
-          format.json { render :show, status: :created, location: @booking }
-        else
-          format.html { render :new }
-          format.json { render json: @booking.errors, status: :unprocessable_entity }
-        end
-      end
+  def set_booking
+      @booking = Booking.find(params[:id])
     end
 
-    private
-
-      def set_flat
-        @flat = Flat.find(params[:flat_id])
-      end
-
-  def set_booking
-
-@booking = Booking.find(params[:id])
-end
 
 def booking_params
-    params.require(:booking).permit(:user_id, :flat_id, :start_date, :end_date, :total_price)
-  end
-end
+      params.require(:booking).permit(:user_id, :flat_id, :start_date, :end_date, :status)
+    end
 
-  def verify_authorized
-  raise Pundit::NotAuthorizedError, self.class unless pundit_policy_authorized?
-      end
-  end
-  
+def Verify_policy_scoped
+
+      raise Pundit::PolicyScopingNotPerformedError, self.class unless pundit_policy_scoped?
+    end
+end
