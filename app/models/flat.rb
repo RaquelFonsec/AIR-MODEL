@@ -2,5 +2,5 @@ class Flat < ApplicationRecord
   belongs_to :user
 
   has_many_attached :fotos
-  has_many :comments
+  has_many :comments, dependent: :destroy
 end

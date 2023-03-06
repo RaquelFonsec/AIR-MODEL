@@ -1,5 +1,22 @@
-<div class="container">
-  <h1><%= @flat.title %></h1>
+
+  <div class="container">
+  <% if @flat.persisted? %>
+    <%= simple_form_for(@flat) do |f| %>
+      <%= f.error_notification %>
+      <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+      <div class="form-inputs">
+        <%= f.input :title %>
+        <%= f.input :city %>
+        <%= f.input :address %>
+        <%= f.input :price %>
+        <%= f.file_field :fotos, multiple: true %>
+      </div>
+      <div class="actions btn btn-light border border-black rounded border-top-5">
+        <%= f.button :submit %>
+      </div>
+    <% end %>
+
+
   <div class="row d-flex justify-content-center">
     <div class="col-md-6">
       <div class="card-rating">
@@ -50,4 +67,5 @@
       <% end %>
     </div>
   </div>
+  <% end %>
 </div>
