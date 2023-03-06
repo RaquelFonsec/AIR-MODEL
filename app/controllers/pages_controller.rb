@@ -2,7 +2,11 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :home ]
 
   def home
+    if params[:filter].present?
+      @flats = Flat.where(category: params[:filter].capitalize)
+    else
     @flats = Flat.all
+    end
     @markers = @flats.geocoded.map do |flat|
       {
         lat: flat.latitude,

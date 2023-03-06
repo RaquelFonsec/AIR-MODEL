@@ -4,7 +4,13 @@
     <p>Find the perfect place to stay for your next trip</p>
   </div>
 </section>
-
+<div>
+<ul class="d-inline">
+<% Flat::CATEGORIES.each do |category| %>
+<li><%= link_to category.capitalize, root_path(filter: category) %></li>
+<% end %>
+</ul>
+</div>
 <h1 class="text-center mb-4">Flats Available for Rent</h1>
 <div class="container">
   <div class="cards">
@@ -19,7 +25,8 @@
         <h5 class="card-title"><%= (flat.title) %></h5>
         <div class="card-info">
           <p class="card-city-country"><%= flat.city %></p>
-          <p class="card-text">Endereço: <%= flat.address %></h5>          <%# <p class="card-description"><strong>Descrição:</strong> <%= @flat.description %>
+          <p class="card-text">Endereço: <%= flat.address %></h5>
+          <p class="card-text">Category: <%= flat.category %></h5>        <%# <p class="card-description"><strong>Descrição:</strong> <%= @flat.description %>
           <p class="card-price"><%= number_to_currency(flat.price) %></p>
           <div class="card-rating">
             <i class="fa fa-star">4,89</i>
