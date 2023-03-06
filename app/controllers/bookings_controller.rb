@@ -16,25 +16,25 @@ class BookingsController < ApplicationController
   end
 
   def create
-   @booking = Booking.new(booking_params)
-   @booking.user = current_user
-   @booking.flat = Flat.find(params[:flat_id])
-   authorize @booking
+    @booking = Booking.new(booking_params)
+    @booking.user = current_user
+    @booking.flat = Flat.find(params[:flat_id])
+    authorize @booking
 
-        if @booking.save
+    if @booking.save
       redirect_to my_bookings_path
-        else
-          render "new" ,message: @booking.errors, status: :unprocessable_entity
-        end
-      end
-
-      private
-
-      def booking_params
-        params.require(:booking).permit(:user_id, :flat_id, :start_date, :end_date, :status)
-      end
-
-      def verify_policy_scoped
-        raise Pundit::PolicyScopingNotPerformedError, self.class unless pundit_policy_scoped?
-      end
+    else
+      render "new" ,message: @booking.errors, status: :unprocessable_entity
     end
+  end
+
+  private
+
+  def booking_params
+    params.require(:booking).permit(:user_id, :flat_id, :start_date, :end_date, :status)
+  end
+
+  def verify_policy_scoped
+    raise Pundit::PolicyScopingNotPerformedError, self.class unless pundit_policy_scoped?
+  end
+end
