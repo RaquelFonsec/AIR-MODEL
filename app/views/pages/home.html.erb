@@ -1,18 +1,17 @@
 <section class="hero">
   <div class="hero-content">
-    <h1>Find Your Dream Flat</h1>
-    <p>Find the perfect place to stay for your next trip</p>
+    <h2>Find the perfect place to stay for your next trip</h2>
   </div>
 </section>
 <div>
-<ul class=" d-flex d-inline justify-content-around">
+<ul class="filter-icons">
 <li><%= link_to "All", root_path %></li>
 <% Flat::CATEGORIES.each do |category| %>
-<li><i class="fa-solid fa-umbrella-beach"></i><%= link_to category.capitalize, root_path(filter: category) %></li>
+<li><i class="fa-solid fa-umbrella-beach"></i> <%= link_to category.capitalize, root_path(filter: category) %></li>
 <% end %>
 </ul>
 </div>
-<h1 class="text-center mb-4">Flats Available for Rent</h1>
+<h1 class="text-center mt-4 mb-4">Flats Available for Rent</h1>
 <div class="container">
   <div class="cards">
     <% @flats.each do |flat| %>
@@ -36,6 +35,7 @@
     <% end %>
   </div>
     <div style="width: 100%; height: 600px;"
+      class="mt-5"
       data-controller="map"
       data-map-markers-value="<%= @markers.to_json %>"
       data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>

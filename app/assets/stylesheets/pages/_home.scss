@@ -16,9 +16,29 @@ a {
   justify-content: center;
   align-items: center;
   margin-bottom: 25px;
+  margin-top: -66px;
 }
-.padding-top {
-padding-top: 66px;
+.filter-icons {
+  display: flex;
+  justify-content: space-around;
+  background-color: #fff;
+  padding: 20px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+
+  li:hover {
+    color: #2d3bd7;
+    transition: 0.5s;
+  }
+
+  a {
+    color: #000;
+  }
+
+  a:hover {
+    color: #2d3bd7;
+    transition: 0.5s;
+  }
 }
 
 #view-details-button {
@@ -26,7 +46,6 @@ padding-top: 66px;
   color: white;
   border-radius: 20px;
   margin-top: 5px;
-  position: absolute;
   bottom: 0px;
   width: 100%;
   transition: 0.5s;
@@ -47,10 +66,7 @@ padding-top: 66px;
   border-radius: 20px;
   margin-top: 5px;
   transition: 0.5s;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 10px;
-  width: 75%;
+  width: 100%;
   height: 40px;
 }
 
