@@ -8,7 +8,7 @@ export default class extends Controller {
    }
 
   connect() {
-    console.log("Map controller")
+    console.log("Map controller connected")
     mapboxgl.accessToken = this.apiKeyValue;
     this.map = new mapboxgl.Map({
       container: this.element,
@@ -29,7 +29,7 @@ export default class extends Controller {
 
   #addMarkersToMap() {
     this.markersValue.forEach((marker) => {
-      const popup = new mapboxgl.Popup().setHTML(marker.info_window)
+      // const popup = new mapboxgl.Popup().setHTML(marker.info_window)
       const customMarker = document.createElement('div')
       customMarker.innerHTML = marker.marker_html
       customMarker.style.height = "30px"

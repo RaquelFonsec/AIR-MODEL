@@ -10,15 +10,35 @@ class BookingsController < ApplicationController
   end
 
   def new
-    @booking = Booking.new
     @flat = Flat.find(params[:flat_id])
+    @booking = Booking.new
     authorize @booking
   end
 
+  def edit
+    @booking = Booking.find(params[:id])
+    authorize @booking
+  end
+
+  def show
+    @booking = Booking.find(params[:id])
+    authorize @booking
+  end
+
+  def destroy
+    @booking = Booking.find(params[:id])
+    @booking.destroy
+    authorize @booking
+
+    redirect_to my_bookings_path, status: :see_other, notice: "Booking excluido com sucesso."
+  end
+
   def create
+    @flat = Flat.find(params[:flat_id])
     @booking = Booking.new(booking_params)
     @booking.user = current_user
-    @booking.flat = Flat.find(params[:flat_id])
+    @booking.flat = @flat
+    @booking.total_price = (@booking.end_date - @booking.start_date).to_i * @flat.price
     authorize @booking
 
     if @booking.save

@@ -1,27 +1,29 @@
-<div id="<%= dom_id booking %>">
-  <p>
-    <strong>User:</strong>
-    <%= booking.user_id %>
-  </p>
+<h1 class="text-center mb-4">Congratulations this is your reservation!!!</h1>
+<div class="container">
+  <div class="cards">
+      <div class="card">
+        <% if booking.flat.photos.attached? %>
+          <img class="card-img-top" src="<%= cl_image_path booking.flat.photos.first.key %>" alt="Card image cap">
+        <% else %>
+          <img class="card-img-top" src="https://picsum.photos/id/1015/300/200" alt="Card image cap">
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title"><%=booking.flat.title%></h5>
+          <div class="card-info">
+            <p class="card-city-country"><%=booking.flat.city%></p>
+            <i class="fa-regular fa-calendar-days"><%= booking.start_date.strftime("%d/%m/%Y") %> --> <%= booking.end_date.strftime("%d/%m/%Y")%> </i>
+            <p class="card-price">$<%=booking.total_price%>0</p>
+            </div>
+              <div>
+                <%= link_to "Edit this booking", edit_booking_path(@booking), class: "btn btn-primary mt-3 rounded" %>
+                <%= link_to "Back to bookings", my_bookings_path, class: "btn btn-info rounded mt-3" %>
+                <%= link_to "Destroy this booking", booking_path(@booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger mt-3 rounded" %>
+              </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
 
-  <p>
-    <strong>Flat:</strong>
-    <%= booking.flat_id %>
-  </p>
-
-  <p>
-    <strong>Start date:</strong>
-    <%= booking.start_date %>
-  </p>
-
-  <p>
-    <strong>End date:</strong>
-    <%= booking.end_date %>
-  </p>
-
-  <p>
-    <strong>Total price:</strong>
-    <%= booking.total_price %>
-  </p>
-
+  <%= link_to "Voltar para a lista de Flats", root_path%>
 </div>

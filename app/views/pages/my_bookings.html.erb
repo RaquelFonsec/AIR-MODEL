@@ -1,10 +1,10 @@
-<h1 class="text-center mb-4">Congratulations this is your reservation!!!</h1>
+<h1 class="text-center mb-4">Congratulations this is your reservations!!!</h1>
 <div class="container">
   <div class="cards">
     <% @bookings.each do |booking|%>
       <div class="card">
         <% if booking.flat.photos.attached? %>
-          <img class="card-img-top" src="<%= cl_image_path flat.photos.first.key %>" alt="Card image cap">
+          <img class="card-img-top" src="<%= cl_image_path booking.flat.photos.first.key %>" alt="Card image cap">
         <% else %>
           <img class="card-img-top" src="https://picsum.photos/id/1015/300/200" alt="Card image cap">
         <% end %>
@@ -18,7 +18,7 @@
             <div class="card-rating">
               <i class="fa fa-star">4,89</i>
             </div>
-            <%= link_to "View Details", flat_path(booking.flat) %>
+            <%= link_to "View Details", booking_path(booking), id: "view-details-button" %>
           </div>
         </div>
       </div>
