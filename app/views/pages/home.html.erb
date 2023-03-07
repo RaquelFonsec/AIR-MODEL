@@ -18,7 +18,7 @@
     <% @flats.each do |flat| %>
     <div class="card">
       <% if flat.fotos.attached? %>
-        <img class="card-img-top" src="<%= cl_image_path flat.fotos.first.key %>" alt="Card image cap">
+        <img class="card-img-top" src="<%= cl_image_path flat.fotos.first.key, height: 300, crop: :fill %>" alt="Card image cap">
       <% else %>
         <img class="card-img-top" src="https://picsum.photos/id/1015/300/200" alt="Card image cap">
       <% end %>
@@ -27,12 +27,9 @@
         <div class="card-info">
           <p class="card-city-country"><%= flat.city %></p>
           <p class="card-text">Endereço: <%= flat.address %></h5>
-          <p class="card-text">Category: <%= flat.category %></h5>        <%# <p class="card-description"><strong>Descrição:</strong> <%= @flat.description %>
+          <p class="card-text">Category: <%= flat.category %></h5>
           <p class="card-price"><%= number_to_currency(flat.price) %></p>
-          <div class="card-rating">
-            <i class="fa fa-star">4,89</i>
-          </div>
-          <%= link_to "View Details", flat_path(flat) %>
+          <p><%= link_to "View Details", flat_path(flat), id: "view-details-button" %></p>
         </div>
       </div>
     </div>
@@ -42,4 +39,6 @@
       data-controller="map"
       data-map-markers-value="<%= @markers.to_json %>"
       data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+    </div>
+  </div>
 </div>
