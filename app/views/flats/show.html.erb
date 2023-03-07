@@ -14,7 +14,7 @@
     <div class="col-md-6">
       <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
-          <% @flat.fotos.each_with_index do |foto, index| %>
+          <% @flat.photos.each_with_index do |foto, index| %>
             <div class="carousel-item <%= index == 0 ? 'active' : '' %>">
               <%= cl_image_tag foto.key, width: 600, height: 400, crop: :fill %>
             </div>
