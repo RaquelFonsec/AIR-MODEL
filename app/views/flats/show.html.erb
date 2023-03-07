@@ -14,9 +14,9 @@
     <div class="col-md-6">
       <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
-          <% @flat.fotos.each_with_index do |foto, index| %>
+          <% @flat.photos.each_with_index do |photo, index| %>
             <div class="carousel-item <%= index == 0 ? 'active' : '' %>">
-              <%= cl_image_tag foto.key, width: 600, height: 400, crop: :fill %>
+              <%= cl_image_tag photo.key, width: 600, height: 400, crop: :fill %>
             </div>
           <% end %>
         </div>
@@ -29,7 +29,16 @@
           <span class="visually-hidden">Next</span>
         </button>
       </div>
+        <%= link_to "Voltar para a lista de Flats", root_path, class: "btn btn-info rounded mt-3"%>
+        <p class="card-description"><strong>Descrição:</strong> <%= @flat.description %>
+        <div class="col-sm-6">
+        <h2>Comentários:</h2>
+        <% @flat.comments.each do |comment| %>
+          <p><%= comment.content %></p>
+        <% end %>
+      </div>
     </div>
+
     <div class="col-md-6">
       <div class="card">
         <div class="card-body">
@@ -38,35 +47,27 @@
           <p class="card-text"><strong>Endereço: </strong> <%= @flat.address %></h5>
           <p class="card-text"><strong>Category: </strong><%= @flat.category %></h5>
           <h5 class="card-title d-flex justify-content-end"><strong>Preço: </strong> <%= number_to_currency(@flat.price) %></h5>
-          <p><%= button_to "Reservar", new_flat_booking_path(@flat), id: "show-reservar-button" %></p>
+          <%= link_to "Reservar", new_flat_booking_path(@flat), id: "show-reservar-button" %>
           <div class="d-flex justify-content-between">
-            <p><%= link_to "Editar", edit_flat_path(@flat) %></p>
-            <p><%= button_to "Excluir", flat_path(@flat), method: :delete, data: { confirm: "Tem certeza que deseja excluir este Flat?" } %></p>
+            <p><%= link_to "Editar", edit_flat_path(@flat), class: "btn btn-primary mt-3 rounded"  %></p>
+            <p><%= button_to "Excluir", flat_path(@flat), method: :delete, data: { confirm: "Tem certeza que deseja excluir este Flat?" }, class: "btn btn-danger mt-3 rounded"  %></p>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  <%= link_to "Voltar para a lista de Flats", root_path%>
-
-  <div class="row d-flex justify-content-between">
-    <p class="card-description"><strong>Descrição:</strong> <%= @flat.description %>
-    <div class="col-sm-4">
-      <h2>Comentários:</h2>
-      <% @flat.comments.each do |comment| %>
-        <p><%= comment.content %></p>
-      <% end %>
-    </div>
-    <div class="col-sm-4">
+          <div class="col-12 mt-4">
       <h2>Adicionar comentário:</h2>
       <%= simple_form_for([@flat, @comment]) do |f| %>
         <div class="form-inputs">
           <%= f.input :content, placeholder: "Deixe seu comentario aqui", label: false %>
-          <%= f.submit "Criar Comentário"%>
+          <%= f.submit "Criar Comentário", class: "btn btn-success rounded"%>
         </div>
       <% end %>
     </div>
+
+    </div>
+
   </div>
+
       <div style="width: 100%; height: 600px;"
       data-controller="show"
       data-show-markers-value="<%= @marker.to_json %>"
