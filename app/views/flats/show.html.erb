@@ -13,8 +13,8 @@
   <div class="row">
     <div class="col-md-6">
       <img class="card-img-top" src="https://picsum.photos/id/1015/300/200" alt="Card image cap">
-      <% @flat.fotos.each do |foto| %>
-        <%= cl_image_tag foto.key,width:300 %>
+      <% @flat.photos.each do |photo| %>
+        <%= cl_image_tag photo.key,width:300 %>
       <% end %>
     </div>
     <div class="col-md-6">
