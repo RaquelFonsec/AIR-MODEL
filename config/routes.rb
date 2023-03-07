@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get "my_flats", to: "pages#my_flats"
 
   resources :flats, except: :index do
-    resources :bookings, only: [:show, :new, :create]
+    resources :bookings, only: [:show, :new, :create, :destroy]
     resources :comments
   end
   resources :bookings, only: [:index]
